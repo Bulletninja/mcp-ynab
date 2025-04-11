@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2020", // Or newer target like ES2022
+    "module": "NodeNext", // Modern Node module system
+    "moduleResolution": "NodeNext",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "sourceMap": true, // Generate source maps for debugging
+    "declaration": true // Generate .d.ts files
+  },
+  "include": ["src/**/*"], // Compile files in src
+  "exclude": ["node_modules", "**/*.spec.ts"] // Exclude node_modules and tests
+}

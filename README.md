@@ -40,8 +40,8 @@ The server provides MCP tools for:
             "mcp-ynab": {
               "command": "node",
               // 👇 Path to the compiled script
-              "args": ["/Users/luis/projects/mcp_servers/mcp-ynab/dist/server.js"], 
-              "cwd": "/Users/luis/projects/mcp_servers/mcp-ynab", // Path to this project
+              "args": ["<path-to-your-project>/mcp-ynab/dist/server.js"], 
+              "cwd": "<path-to-your-project>/mcp-ynab", // Path to this project
               "enabled": true,
               "env": {
                 // 👇 Your YNAB token here, with the correct name!

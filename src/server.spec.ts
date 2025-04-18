@@ -5,29 +5,37 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 // import { MemoryTransport } from '@modelcontextprotocol/sdk/transport.js';
 import { AxiosError } from 'axios';
 import { z } from 'zod'; // Import z
+import { ZodError } from "zod";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
 // Store captured handlers
 const capturedToolHandlers: Record<string, Function> = {};
 
 // Mock the McpServer class
 jest.mock('@modelcontextprotocol/sdk/server/mcp.js', () => {
+  const mockTool = jest.fn((name: string, schemaOrCb: any, cb?: Function) => {
+    // Determine the actual handler based on the arguments provided
+    const handler = typeof schemaOrCb === 'function' ? schemaOrCb : cb;
+    console.log(`[Mock McpServer] Attempting to capture tool: ${name}`); // DEBUG LOG
+    if (handler && typeof handler === 'function') {
+      console.log(`[Mock McpServer]   Handler captured for ${name}`); // DEBUG LOG
+      capturedToolHandlers[name] = handler; // Store the callback
+    } else {
+      console.warn(`[Mock McpServer]   Could NOT capture handler for ${name}. schemaOrCb type: ${typeof schemaOrCb}, cb type: ${typeof cb}`); // DEBUG LOG
+    }
+  });
   return {
     McpServer: jest.fn().mockImplementation((options) => {
-      // Mock the instance methods we need, specifically `tool`
+      console.log('[Mock McpServer] Instantiating mocked McpServer...'); // DEBUG LOG
       return {
-        _options: options, // Store options if needed for verification
-        // Mock the tool method to capture the handler
-        tool: jest.fn((name: string, schema: z.ZodRawShape, cb: Function) => {
-          console.log(`Mock McpServer: Capturing handler for tool: ${name}`);
-          capturedToolHandlers[name] = cb; // Store the callback
-        }),
-        // Mock connect if needed for other tests, though not strictly for tool tests
+        _options: options,
+        tool: mockTool, // Use the refined mock function
         connect: jest.fn().mockResolvedValue(undefined),
-        // Add mocks for resource, prompt, etc. if you test those later
         resource: jest.fn(),
         prompt: jest.fn(),
       };
     }),
+    mockTool, // Expose the mock for assertion
   };
 });
 
@@ -37,16 +45,28 @@ jest.mock('dotenv', () => ({
 }));
 process.env.YNAB_API_TOKEN = 'test-token';
 
-// Import the server instance and ynabApi AFTER mocking McpServer
-import { server, ynabApi } from '../server';
+// Mock the SDK modules BEFORE importing the server
+jest.mock("@modelcontextprotocol/sdk/server/stdio.js", () => {
+  return {
+    StdioServerTransport: jest.fn(),
+  };
+});
 
-// Mock the Axios instance (can stay as is)
-jest.mock('axios', () => ({
+// Mock axios BEFORE importing the server
+jest.mock("axios", () => ({
   create: jest.fn(() => ({
     get: jest.fn(),
     post: jest.fn(),
+    // Add other methods like put, delete if needed
   })),
 }));
+
+// Now import the server components AFTER mocks are set up
+// Use the correct relative path './server'
+import { server, ynabApi } from './server';
+
+// Helper to access the mocked McpServer instance and tool mock
+const MockMcpServer = McpServer as jest.MockedClass<typeof McpServer>;
 
 describe('MCP YNAB Server', () => {
   it('should instantiate the mocked McpServer and capture tool handlers', () => {

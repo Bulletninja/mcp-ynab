@@ -78,5 +78,4 @@ The server provides MCP tools for:
 
 ---
 
-[![Star History Chart](https://api.star-history.com/svg?repos=luis/mcp-ynab&type=Date)](https://star-history.com/#luis/mcp-ynab&Date) 
-*(Replace `luis/mcp-ynab` with your actual username/repo if different)*
+[![Star History Chart](https://api.star-history.com/svg?repos=bulletninja/mcp-ynab&type=Date)](https://star-history.com/#bulletninja/mcp-ynab&Date) 

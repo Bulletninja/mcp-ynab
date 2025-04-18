@@ -262,7 +262,6 @@ async function createTransactionLogic(args: {
 // Tool: List Budgets
 server.tool(
   "mcp_ynab_list_budgets",
-  {},
   async () => {
     // Simply call the logic function and return its result
     return await listBudgetsLogic();

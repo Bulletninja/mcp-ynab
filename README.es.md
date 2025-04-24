@@ -6,18 +6,20 @@
 
 Es una implementación del [Model Context Protocol (MCP)](https://docs.cursor.com/context/model-context-protocol) en TypeScript que actúa como un puente hacia la API oficial de YNAB. El objetivo es proporcionar herramientas estandarizadas para leer y escribir datos de YNAB desde entornos compatibles con MCP, permitiendo a asistentes de IA como el de Cursor ayudarte con tus finanzas.
 
-## 2. Características Principales 🛠️
+## 2. Herramientas Disponibles 🛠️
 
-El servidor proporciona herramientas MCP para:
+Este servidor proporciona las siguientes herramientas, cada una con su documentación detallada (próximamente en español):
 
-*   `mcp_ynab_list_budgets`: Lista tus presupuestos.
-*   `mcp_ynab_list_accounts`: Lista las cuentas de un presupuesto.
-*   `mcp_ynab_list_transactions`: Lista transacciones (con filtros opcionales).
-*   `mcp_ynab_get_account_balance`: Obtiene el saldo de una cuenta.
-*   `mcp_ynab_list_categories`: Lista las categorías de un presupuesto.
-*   `mcp_ynab_get_budget_summary`: Obtiene el resumen del mes actual.
-*   `mcp_ynab_get_category_info`: Obtiene detalles de una categoría específica.
-*   `mcp_ynab_create_transaction`: Crea una nueva transacción (¡recuerda usar milliunits!).
+*   [`listBudgets`](src/tools/listBudgets/README.es.md): Lista tus presupuestos disponibles.
+*   [`listAccounts`](src/tools/listAccounts/README.es.md): Lista las cuentas dentro de un presupuesto especificado.
+*   [`getAccountBalance`](src/tools/getAccountBalance/README.es.md): Obtiene el saldo actual para una cuenta específica.
+*   [`listCategories`](src/tools/listCategories/README.es.md): Lista las categorías dentro de un presupuesto especificado.
+*   [`getCategoryInfo`](src/tools/getCategoryInfo/README.es.md): Obtiene información detallada sobre una categoría específica para un mes determinado.
+*   [`getBudgetSummary`](src/tools/getBudgetSummary/README.es.md): Proporciona un resumen del presupuesto (ingresos, presupuestado, actividad) para un mes específico.
+*   [`listTransactions`](src/tools/listTransactions/README.es.md): Lista las transacciones de un presupuesto, con opciones de filtrado (por cuenta, categoría, fecha, etc.).
+*   [`createTransaction`](src/tools/createTransaction/README.es.md): Crea una nueva transacción o transacción dividida dentro de un presupuesto.
+
+Consulta el archivo `README.es.md` de cada herramienta para obtener información detallada sobre argumentos, salida y contexto de uso.
 
 ## 3. Configuración 🚀
 

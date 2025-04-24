@@ -7,7 +7,8 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "dev": "ts-node src/server.ts",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "keywords": [
     "mcp",
@@ -16,9 +17,9 @@
   "author": "Luis Valenzuela",
   "license": "MIT",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.9.0",
-    "axios": "^1.6.0",
+    "@modelcontextprotocol/sdk": "^1.10.1",
     "dotenv": "^16.0.0",
+    "neverthrow": "^8.2.0",
     "yargs": "^17.7.2",
     "zod": "^3.20.0"
   },

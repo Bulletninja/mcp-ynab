@@ -6,24 +6,26 @@ Welcome to the MCP server for YNAB (TypeScript version)! 🎉 This project allow
 
 This is an implementation of the [Model Context Protocol (MCP)](https://docs.cursor.com/context/model-context-protocol) in TypeScript that acts as a bridge to the official YNAB API. The goal is to provide standardized tools for reading and writing YNAB data from MCP-compatible environments, allowing AI assistants like Cursor's to help you with your finances.
 
-## 2. Main Features 🛠️
+## 2. Available Tools 🛠️
 
-The server provides MCP tools for:
+This server provides the following tools, each with its own detailed documentation:
 
-*   `mcp_ynab_list_budgets`: Lists your budgets.
-*   `mcp_ynab_list_accounts`: Lists accounts for a budget.
-*   `mcp_ynab_list_transactions`: Lists transactions (with optional filters).
-*   `mcp_ynab_get_account_balance`: Gets the balance of an account.
-*   `mcp_ynab_list_categories`: Lists categories for a budget.
-*   `mcp_ynab_get_budget_summary`: Gets the summary for the current month.
-*   `mcp_ynab_get_category_info`: Gets details for a specific category.
-*   `mcp_ynab_create_transaction`: Creates a new transaction (remember to use milliunits!).
+*   [`listBudgets`](src/tools/listBudgets/README.md): Lists your available budgets.
+*   [`listAccounts`](src/tools/listAccounts/README.md): Lists accounts within a specified budget.
+*   [`getAccountBalance`](src/tools/getAccountBalance/README.md): Fetches the current balance for a specific account.
+*   [`listCategories`](src/tools/listCategories/README.md): Lists categories within a specified budget.
+*   [`getCategoryInfo`](src/tools/getCategoryInfo/README.md): Gets detailed information about a specific category for a given month.
+*   [`getBudgetSummary`](src/tools/getBudgetSummary/README.md): Provides a budget summary (income, budgeted, activity) for a specific month.
+*   [`listTransactions`](src/tools/listTransactions/README.md): Lists transactions for a budget, with filtering options (by account, category, date, etc.).
+*   [`createTransaction`](src/tools/createTransaction/README.md): Creates a new transaction or split transaction within a budget.
+
+See each tool's `README.md` for detailed information on arguments, output, and usage context.
 
 ## 3. Setup 🚀
 
 1.  **Clone the Repository:**
     ```bash
-    # git clone <REPOSITORY_URL> # If you haven't already
+    # git clone https://github.com/Bulletninja/mcp-ynab # If you haven't already
     cd mcp-ynab 
     ```
 2.  **Install Dependencies:**
